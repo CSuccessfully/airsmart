@@ -9,13 +9,13 @@
   body {
     font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
-    background: linear-gradient(180deg, #072f47 0%, #0c5a73 35%, #1a8aa8 65%, #4ab0c8 100%);
+    background: #072f47;
     padding: 20px 16px 32px;
     position: relative;
     overflow-x: hidden;
   }
 
-  .waves-bg {
+  .waves-container {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
@@ -23,67 +23,70 @@
     z-index: 0;
   }
 
-  .wave-layer {
+  .waves-container svg {
     position: absolute;
-    width: 200%;
-    left: -50%;
+    bottom: 0;
+    width: 100%;
   }
 
-  .wave1 { top: 18%; animation: waveMove 8s ease-in-out infinite; opacity: 0.18; }
-  .wave2 { top: 28%; animation: waveMove 11s ease-in-out infinite reverse; opacity: 0.12; }
-  .wave3 { top: 38%; animation: waveMove 14s ease-in-out infinite; opacity: 0.09; }
+  .wave-a { animation: waveA 6s ease-in-out infinite; }
+  .wave-b { animation: waveB 9s ease-in-out infinite; }
+  .wave-c { animation: waveC 12s ease-in-out infinite; }
 
-  @keyframes waveMove {
-    0%   { transform: translateX(0); }
-    50%  { transform: translateX(8%); }
-    100% { transform: translateX(0); }
+  @keyframes waveA {
+    0%, 100% { d: path("M0,40 C80,10 160,70 240,40 C320,10 400,70 480,40 C560,10 640,70 720,40 L720,200 L0,200 Z"); }
+    50%       { d: path("M0,55 C80,80 160,20 240,55 C320,80 400,20 480,55 C560,80 640,20 720,55 L720,200 L0,200 Z"); }
+  }
+  @keyframes waveB {
+    0%, 100% { d: path("M0,50 C90,20 180,80 270,50 C360,20 450,80 540,50 C630,20 690,65 720,50 L720,200 L0,200 Z"); }
+    50%       { d: path("M0,35 C90,65 180,15 270,35 C360,65 450,15 540,35 C630,65 690,30 720,35 L720,200 L0,200 Z"); }
+  }
+  @keyframes waveC {
+    0%, 100% { d: path("M0,60 C70,35 140,80 210,55 C280,30 350,75 420,50 C490,25 560,70 630,45 C670,32 700,55 720,45 L720,200 L0,200 Z"); }
+    50%       { d: path("M0,45 C70,70 140,30 210,50 C280,70 350,25 420,45 C490,70 560,30 630,55 C670,68 700,42 720,55 L720,200 L0,200 Z"); }
   }
 
   .content { position: relative; z-index: 1; }
 
   .top-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
-  .greeting { font-size: 13px; color: rgba(255,255,255,0.75); letter-spacing: 0.3px; font-weight: 500; }
-  .status-pill { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border-radius: 20px; padding: 5px 12px 5px 8px; border: 1px solid rgba(255,255,255,0.25); }
+  .greeting { font-size: 13px; color: rgba(255,255,255,0.7); letter-spacing: 0.3px; font-weight: 500; }
+  .status-pill { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); border-radius: 20px; padding: 5px 12px 5px 8px; border: 1px solid rgba(255,255,255,0.2); }
   .status-pill.offline .dot { background: #f43f5e; box-shadow: 0 0 0 3px #f43f5e33; }
   .status-pill.online .dot { background: #10b981; box-shadow: 0 0 0 3px #10b98133; }
   .dot { width: 8px; height: 8px; border-radius: 50%; }
   .status-pill span { font-size: 12px; color: white; font-weight: 500; }
 
-  .big-num-card { border-radius: 22px; padding: 22px 22px 18px; margin-bottom: 12px; position: relative; overflow: hidden; background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
-  .card-label { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px; opacity: 0.7; color: white; }
+  .big-num-card { border-radius: 22px; padding: 22px 22px 18px; margin-bottom: 12px; position: relative; overflow: hidden; background: rgba(255,255,255,0.1); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.18); }
+  .card-label { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px; opacity: 0.6; color: white; }
   .card-value { font-family: 'DM Mono', monospace; font-size: 58px; font-weight: 400; line-height: 1; color: white; }
-  .card-value.waiting { font-size: 42px; opacity: 0.45; }
+  .card-value.waiting { font-size: 42px; opacity: 0.4; }
   .card-unit { font-size: 24px; opacity: 0.6; margin-left: 2px; }
-  .bar-track { height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; margin-top: 18px; }
-  .bar-fill { height: 100%; border-radius: 2px; background: rgba(255,255,255,0.5); }
-  .circle-deco { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); }
+  .bar-track { height: 3px; background: rgba(255,255,255,0.12); border-radius: 2px; margin-top: 18px; }
+  .bar-fill { height: 100%; border-radius: 2px; background: rgba(255,255,255,0.45); }
+  .circle-deco { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,0.07); }
 
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-  .small-card { background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.18); }
-  .small-label { font-size: 10px; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
+  .small-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(16px); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.15); }
+  .small-label { font-size: 10px; color: rgba(255,255,255,0.55); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
   .small-val { font-family: 'DM Mono', monospace; font-size: 28px; color: white; font-weight: 400; }
-  .small-val.waiting { opacity: 0.35; font-size: 22px; }
-  .small-unit { font-size: 14px; opacity: 0.6; }
+  .small-val.waiting { opacity: 0.3; font-size: 22px; }
+  .small-unit { font-size: 14px; opacity: 0.55; }
 
-  .fan-card { background: rgba(0,0,0,0.25); backdrop-filter: blur(12px); border-radius: 18px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); }
+  .fan-card { background: rgba(0,0,0,0.3); backdrop-filter: blur(16px); border-radius: 18px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,0.1); }
   .fan-title { font-size: 15px; font-weight: 500; color: white; }
-  .fan-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+  .fan-sub { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 3px; }
   .fan-badge { font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 20px; }
   .fan-badge.active { background: #10b98122; color: #6ee7b7; border: 1px solid #10b98144; }
-  .fan-badge.inactive { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.15); }
+  .fan-badge.inactive { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.12); }
 </style>
 </head>
 <body>
 
-<div class="waves-bg">
-  <svg class="wave-layer wave1" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path d="M0,60 C180,100 360,20 540,60 C720,100 900,20 1080,60 C1260,100 1380,40 1440,60 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.15)"/>
-  </svg>
-  <svg class="wave-layer wave2" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path d="M0,40 C200,80 400,10 600,50 C800,90 1000,10 1200,50 C1320,70 1400,30 1440,50 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.1)"/>
-  </svg>
-  <svg class="wave-layer wave3" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path d="M0,70 C150,30 350,90 550,50 C750,10 950,80 1150,40 C1300,20 1400,60 1440,40 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.07)"/>
+<div class="waves-container">
+  <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" style="height:45%;">
+    <path class="wave-c" d="M0,60 C70,35 140,80 210,55 C280,30 350,75 420,50 C490,25 560,70 630,45 C670,32 700,55 720,45 L720,200 L0,200 Z" fill="rgba(14,116,144,0.35)"/>
+    <path class="wave-b" d="M0,50 C90,20 180,80 270,50 C360,20 450,80 540,50 C630,20 690,65 720,50 L720,200 L0,200 Z" fill="rgba(8,145,178,0.3)"/>
+    <path class="wave-a" d="M0,40 C80,10 160,70 240,40 C320,10 400,70 480,40 C560,10 640,70 720,40 L720,200 L0,200 Z" fill="rgba(6,182,212,0.25)"/>
   </svg>
 </div>
 
@@ -97,7 +100,7 @@
     </div>
   </div>
 
-  <div class="big-num-card hum">
+  <div class="big-num-card">
     <div class="circle-deco" style="width:120px;height:120px;top:-40px;right:-30px;"></div>
     <div class="circle-deco" style="width:60px;height:60px;bottom:-10px;right:60px;"></div>
     <div class="card-label">Humedad</div>
@@ -105,7 +108,7 @@
     <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
   </div>
 
-  <div class="big-num-card temp">
+  <div class="big-num-card">
     <div class="circle-deco" style="width:100px;height:100px;top:-30px;right:-20px;"></div>
     <div class="circle-deco" style="width:50px;height:50px;bottom:-5px;left:40px;"></div>
     <div class="card-label">Temperatura</div>
